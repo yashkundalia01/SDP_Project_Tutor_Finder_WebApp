@@ -1,3 +1,4 @@
 {
-  "mongoURI": "mongodb+srv://yash123:yash123@tutorfinder.oeujs.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
+  "mongoURI": "mongodb+srv://yash123:yash123@tutorfinder.oeujs.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
+  "jwtSecret": "mysecrettoken"
 }
