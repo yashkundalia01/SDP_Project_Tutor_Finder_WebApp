@@ -110,7 +110,7 @@ class AddCourse extends Component {
           <div className='form-group'>
             <input
               type='text'
-              placeholder='* Demo Video Link'
+              placeholder='* Demo Video Link  Ex: (https://www.youtube.com/watch?v=bsjfvjfjaf)'
               name='demo_video_link'
               onChange={(e) => this.onChangeHandler(e)}
               required

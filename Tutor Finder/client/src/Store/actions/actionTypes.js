@@ -9,6 +9,7 @@ export const TUTOR_LOADED = "TUTOR_LOADED";
 export const UPDATE_STUDENT = "UPDATE_STUDENT";
 export const UPDATE_TUTOR = "UPDATE_TUTOR";
 export const UPDATE_FAIL = "UPDATE_FAIL";
+export const GET_TUTOR_DETAILS = "GET_TUTOR_DETAILS";
 
 export const LOGOUT = "LOGOUT";
 

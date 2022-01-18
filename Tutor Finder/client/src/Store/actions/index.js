@@ -10,4 +10,6 @@ export {
   loadTutor,
 } from "./auth";
 
+export { getTutors } from "./tutors";
+
 export { setAlert } from "./alert";

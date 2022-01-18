@@ -160,6 +160,11 @@ img {
   color: #333;
 }
 
+.bg-primary1 {
+  background: var(--primary-color);
+  color: #fff;
+}
+
 .btn-primary,
 .bg-primary,
 .badge-primary,
@@ -292,6 +297,10 @@ button {
   color: #0077b5;
 }
 
+.table {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
 .table th,
 .table td {
   padding: 1rem;
@@ -349,6 +358,7 @@ button {
 /* Profiles Page */
 .profile {
   display: grid;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   grid-template-columns: 2fr 4fr 2fr;
   align-items: center;
   grid-gap: 2rem;
@@ -369,6 +379,7 @@ button {
 }
 
 .profile-top {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   grid-area: top;
   display: flex;
   flex-direction: column;
@@ -391,6 +402,7 @@ button {
 }
 
 .profile-about {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   grid-area: about;
   text-align: center;
 }
@@ -403,10 +415,12 @@ button {
 }
 
 .profile-exp {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   grid-area: exp;
 }
 
 .profile-edu {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   grid-area: edu;
 }
 

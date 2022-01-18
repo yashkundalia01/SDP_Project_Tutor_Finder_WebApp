@@ -6,6 +6,19 @@ const config = require("config");
 const jwt = require("jsonwebtoken");
 const auth = require("../../../middleware/auth");
 
+// @route   GET api/tutors
+// @desc    Get all tutor details
+// @access  Public
+router.get("/", async (req, res) => {
+  try {
+    const tutors = await Tutor.find();
+    res.send(tutors);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server error");
+  }
+});
+
 // @route   POST api/tutors
 // @desc    Register tutor
 // @access  Public
