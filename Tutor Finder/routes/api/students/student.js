@@ -92,8 +92,8 @@ router.post("/edit", auth, async (req, res) => {
   }
 });
 
-router.post("/post", auth, async (req, res) => {
-  const { title, fee, language, description, course } =
+router.post("/api/students/post", async (req, res) => {
+  const { title, fee, language, description, course, email } =
     req.body;
 
   try {
@@ -117,6 +117,8 @@ router.post("/post", auth, async (req, res) => {
 
     Student.save();
     res.send("Post added Successfully");
+    console.log("data send");
+
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server error");

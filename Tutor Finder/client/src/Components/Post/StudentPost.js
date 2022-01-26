@@ -36,6 +36,8 @@ class Post extends Component {
         course,
       });
       console.log("on submit");
+      const res = await axios.post("/api/students/post", body, config);
+
   };
 
   render() {
