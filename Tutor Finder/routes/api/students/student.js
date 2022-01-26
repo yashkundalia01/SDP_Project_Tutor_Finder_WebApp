@@ -92,4 +92,35 @@ router.post("/edit", auth, async (req, res) => {
   }
 });
 
+router.post("/post", auth, async (req, res) => {
+  const { title, fee, language, description, course } =
+    req.body;
+
+  try {
+    // See if user exists
+    let Student = await Student.findOne({ email });
+
+    if (Student == null) {
+      res.status(400).json({ errors: [{ msg: "User not exists" }] });
+    }
+
+    const newpost = {
+      title: title,
+      fee: fee,
+      language: language,
+      description: description,
+      course: course,
+    };
+
+    // Add to post array
+    Student.post.unshift(newpost);
+
+    Student.save();
+    res.send("Post added Successfully");
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server error");
+  }
+});
+
 module.exports = router;

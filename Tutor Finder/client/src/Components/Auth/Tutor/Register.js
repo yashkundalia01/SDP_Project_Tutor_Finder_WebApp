@@ -429,7 +429,7 @@ class Register extends Component {
       </div>
     );
 
-    if (this.props.loading) register_form = <Spinner />;
+    // if (this.props.loading) register_form = <Spinner />;
 
     return register_form;
   }

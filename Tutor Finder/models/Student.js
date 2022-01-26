@@ -34,6 +34,28 @@ const StudentSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  post: [
+    {
+      title: {
+        type: String,
+        required: true,
+      },
+      fee: {
+        type: String,
+        required: true,
+      },
+      language: {
+        type: String,
+        required: true,
+      },
+      description: {
+        type: String,
+      },
+      course: {
+        type: String,
+      },
+    },
+  ],
 });
 
 module.exports = Student = mongoose.model("student", StudentSchema);

@@ -61,7 +61,7 @@ class StudentLogin extends Component {
       </div>
     );
 
-    if (this.props.loading) login_form = <Spinner />;
+    // if (this.props.loading) login_form = <Spinner />;
 
     return login_form;
   }
