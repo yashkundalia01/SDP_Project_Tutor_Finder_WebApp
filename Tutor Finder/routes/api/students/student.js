@@ -92,15 +92,15 @@ router.post("/edit", auth, async (req, res) => {
   }
 });
 
-router.post("/api/students/post", async (req, res) => {
+router.post("/post", async (req, res) => {
   const { title, fee, language, description, course, email } =
     req.body;
 
   try {
     // See if user exists
-    let Student = await Student.findOne({ email });
+    let student = await Student.findOne({ email });
 
-    if (Student == null) {
+    if (student == null) {
       res.status(400).json({ errors: [{ msg: "User not exists" }] });
     }
 
@@ -113,9 +113,9 @@ router.post("/api/students/post", async (req, res) => {
     };
 
     // Add to post array
-    Student.post.unshift(newpost);
+    student.post.unshift(newpost);
 
-    Student.save();
+    student.save();
     res.send("Post added Successfully");
     console.log("data send");
 
@@ -124,5 +124,4 @@ router.post("/api/students/post", async (req, res) => {
     res.status(500).send("Server error");
   }
 });
-
 module.exports = router;

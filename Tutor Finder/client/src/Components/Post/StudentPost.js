@@ -1,5 +1,9 @@
 import { Component } from "react";
 import { Link, Redirect } from "react-router-dom";
+import { connect } from "react-redux";
+import axios from "axios";
+import * as action from "../../Store/actions";
+
 
 class Post extends Component {
   state = {
@@ -8,6 +12,7 @@ class Post extends Component {
     language: "",
     description: "",
     course: "",
+
   };
 
   onChangeHandler = (e) =>
@@ -34,10 +39,12 @@ class Post extends Component {
         language,
         description,
         course,
+        email: this.props.student.email,
       });
       console.log("on submit");
-      const res = await axios.post("/api/students/post", body, config);
+      const res = axios.post("/api/students/post", body, config);
 
+      this.props.setAlert("Post added");
   };
 
   render() {
@@ -122,4 +129,15 @@ class Post extends Component {
   }
 }
 
-export default Post;
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setAlert: (msg) => dispatch(action.setAlert(msg, "success")),
+  };
+};
+
+const mapStateToProps = (state) => ({
+  student: state.auth.user,
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Post);
