@@ -272,7 +272,7 @@ router.delete("/courses/:course_id", auth, async (req, res) => {
 
   const removeIndex = tutor.course
     .map((item) => item.id)
-    .indexOf(req.params.exp_id);
+    .indexOf(req.params.course_id);
 
   // Splice out of array
   tutor.course.splice(removeIndex, 1);

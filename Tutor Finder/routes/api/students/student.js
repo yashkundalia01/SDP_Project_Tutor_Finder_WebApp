@@ -6,6 +6,19 @@ const config = require("config");
 const jwt = require("jsonwebtoken");
 const auth = require("../../../middleware/auth");
 
+// @route   GET api/students
+// @desc    Get all student details
+// @access  Public
+router.get("/", async (req, res) => {
+  try {
+    const students = await Student.find();
+    res.send(students);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server error");
+  }
+});
+
 // @route   POST api/students
 // @desc    Register student
 // @access  Public
@@ -93,8 +106,7 @@ router.post("/edit", auth, async (req, res) => {
 });
 
 router.post("/post", async (req, res) => {
-  const { title, fee, language, description, course, email } =
-    req.body;
+  const { title, fee, language, email } = req.body;
 
   try {
     // See if user exists
@@ -108,8 +120,6 @@ router.post("/post", async (req, res) => {
       title: title,
       fee: fee,
       language: language,
-      description: description,
-      course: course,
     };
 
     // Add to post array
@@ -118,10 +128,33 @@ router.post("/post", async (req, res) => {
     student.save();
     res.send("Post added Successfully");
     console.log("data send");
-
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server error");
   }
 });
+
+// @route   DELETE api/students/post/:post_id
+// @desc    Delete post from student
+// @access  Private
+router.delete("/post/:post_id", auth, async (req, res) => {
+  // See if user exists
+  let student = await Student.findById((id = req.user.id));
+
+  if (student == null) {
+    res.status(400).json({ errors: [{ msg: "User not exists" }] });
+  }
+
+  const removeIndex = student.post
+    .map((item) => item.id)
+    .indexOf(req.params.post_id);
+
+  // Splice out of array
+  student.post.splice(removeIndex, 1);
+
+  // Save
+  student.save();
+  res.send("DELETED Successfully");
+});
+
 module.exports = router;

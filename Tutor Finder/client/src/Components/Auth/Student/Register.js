@@ -50,7 +50,9 @@ class Register extends Component {
     let register_form = (
       <div>
         <h1 className='large primary-text'>Sign Up</h1>
-        <p className='lead'>Create Your Account</p>
+        <p className='lead'>
+          <i class='fas fa-user'></i> Create Your Account
+        </p>
         <form className='form' onSubmit={(e) => this.onSubmitHandler(e)}>
           <div className='form-group'>
             <input
@@ -403,7 +405,7 @@ class Register extends Component {
       </div>
     );
 
-    // if (this.props.loading) register_form = <Spinner />;
+    if (this.props.loading) register_form = <Spinner />;
 
     return register_form;
   }

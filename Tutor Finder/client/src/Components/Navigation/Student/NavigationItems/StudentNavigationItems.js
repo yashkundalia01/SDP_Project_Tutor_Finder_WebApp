@@ -18,9 +18,9 @@ class navigationItems extends Component {
       <ul className='NavigationItems'>
         <NavigationItem link='/student/dashboard'> Dashboard </NavigationItem>
         <NavigationItem link='/student/post'>Post</NavigationItem>
-        <NavigationItem link='/student/profile'> Profile </NavigationItem>
+        <NavigationItem link='/student/profile'>Profile </NavigationItem>
         <Link onClick={this.props.logout} to='/student/login' style={myStyle}>
-          Logout
+          Logout <i class='fas fa-sign-out-alt'></i>
         </Link>
       </ul>
     );

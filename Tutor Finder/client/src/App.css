@@ -48,6 +48,7 @@ img {
 .x-large {
   font-size: 4rem;
   line-height: 1.2;
+  font-weight: bold;
   margin-bottom: 1rem;
 }
 
@@ -55,6 +56,7 @@ img {
   font-size: 3rem;
   line-height: 1.2;
   margin-bottom: 1rem;
+  font-weight: bold;
 }
 
 .lead {
@@ -72,6 +74,10 @@ img {
 
 .primary-text {
   color: #17a2b8;
+}
+
+.danger-text {
+  color: #dc3545;
 }
 
 .text-dark {
@@ -264,6 +270,7 @@ img {
   width: 100%;
   padding: 0.4rem;
   font-size: 1.2rem;
+  font-weight: 600;
   border: 1px solid #ccc;
 }
 

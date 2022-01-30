@@ -4,15 +4,10 @@ import { connect } from "react-redux";
 import axios from "axios";
 import * as action from "../../Store/actions";
 
-
 class Post extends Component {
   state = {
     title: "",
-    fee: "",
     language: "",
-    description: "",
-    course: "",
-
   };
 
   onChangeHandler = (e) =>
@@ -25,31 +20,29 @@ class Post extends Component {
     event.preventDefault();
 
     const config = {
-        headers: {
-          "Content-Type": "application/json",
-          "x-auth-token": localStorage.token,
-        },
-      };
-    
-    this.setState({ ...this.state });
-    const { title, fee, language, description, course} =this.state;
-    const body = JSON.stringify({
-        title,
-        fee,
-        language,
-        description,
-        course,
-        email: this.props.student.email,
-      });
-      console.log("on submit");
-      const res = axios.post("/api/students/post", body, config);
+      headers: {
+        "Content-Type": "application/json",
+        "x-auth-token": localStorage.token,
+      },
+    };
 
+    this.setState({ ...this.state });
+    const { title, fee, language, description, course } = this.state;
+    const body = JSON.stringify({
+      title,
+      fee,
+      language,
+      email: this.props.student.email,
+    });
+    console.log("on submit");
+    axios.post("/api/students/post", body, config).then((req, res) => {
       this.props.setAlert("Post added");
+    });
   };
 
   render() {
     if (!localStorage.token) {
-        return <Redirect to='/' />;
+      return <Redirect to='/' />;
     }
     let post_form = (
       <div>
@@ -60,19 +53,9 @@ class Post extends Component {
             <input
               type='text'
               onChange={(e) => this.onChangeHandler(e)}
-              placeholder='Title'
+              placeholder='Enter the course name.'
               name='title'
               value={this.state.title}
-              required
-            />
-          </div>
-          <div className='form-group'>
-            <input
-              type='text'
-              onChange={(e) => this.onChangeHandler(e)}
-              placeholder='Fee Value'
-              name='fee'
-              value={this.state.fee}
               required
             />
           </div>
@@ -101,26 +84,7 @@ class Post extends Component {
               <option value='Spanish'>Spanish - español</option>
             </select>
           </div>
-          <div className='form-group'>
-            <input
-              type='text'
-              onChange={(e) => this.onChangeHandler(e)}
-              placeholder='course'
-              name='course'
-              value={this.state.course}
-              required
-            />
-          </div>
-          <div className='form-group'>
-            <textarea
-              name='description'
-              cols='30'
-              rows='5'
-              onChange={(e) => this.onChangeHandler(e)}
-              placeholder='Course Description'
-            ></textarea>
-          </div>
-          <input type='submit' className='btn btn-primary'/>
+          <input type='submit' className='btn btn-primary' />
         </form>
       </div>
     );
@@ -128,7 +92,6 @@ class Post extends Component {
     return post_form;
   }
 }
-
 
 const mapDispatchToProps = (dispatch) => {
   return {

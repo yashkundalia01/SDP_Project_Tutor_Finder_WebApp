@@ -10,7 +10,8 @@ import { connect } from "react-redux";
 import * as action from "../Store/actions";
 import StudentProfile from "../Components/Profile/StudentProfile";
 import CourseDetails from "../Components/Details/CourseDetails";
-import post from "../Components/Post/StudentPost";
+import post from "../Components/Post/AddPost";
+import StudentPosts from "../Components/Post/StudentPosts";
 class Student extends Component {
   async componentDidMount() {
     await this.props.loadStudent();
@@ -28,8 +29,8 @@ class Student extends Component {
             <Route path='/student/detail' component={TutorDetails} />
             <Route path='/student/course-details' component={CourseDetails} />
             <Route exact path='/student/profile' component={StudentProfile} />
-            <Route exact path='/student/post' component={post} />
-
+            <Route exact path='/student/addpost' component={post} />
+            <Route exact path='/student/post' component={StudentPosts} />
           </Switch>
         </Layout>
       </div>

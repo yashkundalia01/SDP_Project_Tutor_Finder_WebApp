@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import * as action from "../../Store/actions";
 import Moment from "react-moment";
+import Spinner from "../UI/Spinner/Spinner";
 
 class TutorDetail extends Component {
   state = {
@@ -33,7 +34,8 @@ class TutorDetail extends Component {
             />
             <h1 class='large'>{tutor.name}</h1>
             <p>
-              {tutor.city}, {tutor.country}
+              <i class='fas fa-map-marker-alt'></i> {tutor.city},{" "}
+              {tutor.country}
             </p>
           </div>
           <div class='profile-about bg-light p-2'>
@@ -78,6 +80,7 @@ class TutorDetail extends Component {
                   <div key={exp._id}>
                     <h3 class='text-dark'>{exp.company}</h3>
                     <p>
+                      <i class='fas fa-calendar-day'></i>{" "}
                       <Moment format='DD/MM/YYYY'>{exp.from}</Moment> -{" "}
                       {exp.to == null || exp.to == undefined ? (
                         "Now"
@@ -86,11 +89,15 @@ class TutorDetail extends Component {
                       )}
                     </p>
                     <p>
-                      <strong>Position: </strong>
+                      <strong>
+                        <i class='fas fa-users'></i> Position:{" "}
+                      </strong>
                       {exp.title}
                     </p>
                     <p>
-                      <strong>Description: </strong>
+                      <strong>
+                        <i class='fas fa-info-circle'></i> Description:{" "}
+                      </strong>
                       {exp.description}
                     </p>
                   </div>
@@ -108,6 +115,7 @@ class TutorDetail extends Component {
                   <div key={edu._id}>
                     <h3>{edu.school}</h3>
                     <p>
+                      <i class='fas fa-calendar-day'></i>{" "}
                       <Moment format='DD/MM/YYYY'>{edu.from}</Moment> -{" "}
                       {edu.to == null || edu.to == undefined ? (
                         "Now"
@@ -116,15 +124,22 @@ class TutorDetail extends Component {
                       )}
                     </p>
                     <p>
-                      <strong>Degree: </strong>
+                      <strong>
+                        {" "}
+                        <i class='fas fa-user-graduate'></i> Degree:{" "}
+                      </strong>
                       {edu.degree}
                     </p>
                     <p>
-                      <strong>Field Of Study: </strong>
+                      <strong>
+                        <i class='fas fa-book'></i> Field Of Study:{" "}
+                      </strong>
                       {edu.fieldofstudy}
                     </p>
                     <p>
-                      <strong>Description: </strong>
+                      <strong>
+                        <i class='fas fa-info-circle'></i> Description:{" "}
+                      </strong>
                       {edu.description}
                     </p>
                   </div>
@@ -135,10 +150,13 @@ class TutorDetail extends Component {
         </div>
       );
     }
+
+    if (this.props.loading || tutor == null) tutor = <Spinner />;
+
     return (
       <div>
         <Link to='/student/dashboard' class='btn btn-light'>
-          Back To Profiles
+          <i class='fas fa-arrow-left'></i> Back To Profiles
         </Link>
         <br></br>
         <br></br>
@@ -156,6 +174,7 @@ const mapDispatchToProps = (dispatch) => {
 
 const mapStateToProps = (state) => ({
   tutors: state.tutors,
+  loading: state.auth.loading,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TutorDetail);

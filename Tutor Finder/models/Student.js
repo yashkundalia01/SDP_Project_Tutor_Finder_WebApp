@@ -40,19 +40,13 @@ const StudentSchema = new mongoose.Schema({
         type: String,
         required: true,
       },
-      fee: {
-        type: String,
-        required: true,
-      },
       language: {
         type: String,
         required: true,
       },
-      description: {
-        type: String,
-      },
-      course: {
-        type: String,
+      date: {
+        type: Date,
+        default: Date.now,
       },
     },
   ],
