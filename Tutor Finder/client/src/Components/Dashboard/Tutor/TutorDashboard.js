@@ -110,12 +110,16 @@ class TutorDashboard extends Component {
             <td>{item.title}</td>
             <td className='hide-sm'>{item.fee}</td>
             <td className='hide-sm'>{item.language}</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
             <td>
               <button
                 className='btn btn-primary'
                 onClick={this.deleteCourse.bind(this, item._id)}
               >
-                Delete
+                <i class='fas fa-trash-alt'></i> Delete
               </button>
             </td>
           </tr>
@@ -144,7 +148,7 @@ class TutorDashboard extends Component {
                 className='btn btn-primary'
                 onClick={this.deleteExperience.bind(this, item._id)}
               >
-                Delete
+                <i class='fas fa-trash-alt'></i> Delete
               </button>
             </td>
           </tr>
@@ -173,7 +177,7 @@ class TutorDashboard extends Component {
                 className='btn btn-primary'
                 onClick={this.deleteEducation.bind(this, item._id)}
               >
-                Delete
+                <i class='fas fa-trash-alt'></i> Delete
               </button>
             </td>
           </tr>
@@ -184,19 +188,21 @@ class TutorDashboard extends Component {
     return (
       <div>
         <h1 className='large primary-text'>Dashboard</h1>
-        <p className='lead'>Welcome {this.state.name}</p>
+        <p className='lead'>
+          Welcome {this.state.name} <i class='fas fa-user'></i>
+        </p>
         <div className='dash-buttons'>
           <Link to={"/tutor/profile"} className='btn btn-primary'>
-            Edit Profile
+            <i class='fas fa-pen'></i> Edit Profile
           </Link>
           <Link to={"/tutor/add-experience"} className='btn btn-primary'>
-            Add Experience
+            <i class='fas fa-plus'></i> Add Experience
           </Link>
           <Link to={"/tutor/add-education"} className='btn btn-primary'>
-            Add Education
+            <i class='fas fa-plus'></i> Add Education
           </Link>
           <Link to={"/tutor/add-course"} className='btn btn-primary'>
-            Add Course
+            <i class='fas fa-plus'></i> Add Course
           </Link>
         </div>
         <br></br>
@@ -218,7 +224,7 @@ class TutorDashboard extends Component {
           className='btn btn-primary'
           onClick={this.changeAvailabilityStatus}
         >
-          Update
+          <i class='fas fa-pen'></i> Update
         </button>
         <br></br>
         <br></br>
@@ -226,9 +232,19 @@ class TutorDashboard extends Component {
         <table className='table'>
           <thead>
             <tr>
-              <th>Title</th>
-              <th className='hide-sm'>Fee</th>
-              <th className='hide-sm'>Language</th>
+              <th>
+                <i class='fas fa-circle'></i> Title
+              </th>
+              <th className='hide-sm'>
+                <i class='fas fa-money-bill-wave-alt'></i> Fee
+              </th>
+              <th className='hide-sm'>
+                <i class='fas fa-language'></i> Language
+              </th>
+              <th></th>
+              <th></th>
+              <th></th>
+              <th></th>
               <th></th>
             </tr>
           </thead>
@@ -240,10 +256,18 @@ class TutorDashboard extends Component {
         <table className='table'>
           <thead>
             <tr>
-              <th>Company</th>
-              <th className='hide-sm'>Title</th>
-              <th className='hide-sm'>From</th>
-              <th className='hide-sm'>To</th>
+              <th>
+                <i class='fas fa-building'></i> Company
+              </th>
+              <th className='hide-sm'>
+                <i class='fas fa-circle'></i> Title
+              </th>
+              <th className='hide-sm'>
+                <i class='fas fa-calendar-day'></i> From
+              </th>
+              <th className='hide-sm'>
+                <i class='fas fa-calendar-day'></i> To
+              </th>
               <th></th>
             </tr>
           </thead>
@@ -255,10 +279,18 @@ class TutorDashboard extends Component {
         <table className='table'>
           <thead>
             <tr>
-              <th>School/College</th>
-              <th className='hide-sm'>Degree</th>
-              <th className='hide-sm'>From</th>
-              <th className='hide-sm'>To</th>
+              <th>
+                <i class='fas fa-building'></i> School/College
+              </th>
+              <th className='hide-sm'>
+                <i class='fas fa-graduation-cap'></i> Degree
+              </th>
+              <th className='hide-sm'>
+                <i class='fas fa-calendar-day'></i> From
+              </th>
+              <th className='hide-sm'>
+                <i class='fas fa-calendar-day'></i> To
+              </th>
               <th></th>
             </tr>
           </thead>

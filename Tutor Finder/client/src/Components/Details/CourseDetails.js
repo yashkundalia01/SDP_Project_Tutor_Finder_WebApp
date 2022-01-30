@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import * as action from "../../Store/actions";
+import Spinner from "../UI/Spinner/Spinner";
 
 class CourseDetails extends Component {
   state = {
@@ -38,7 +39,7 @@ class CourseDetails extends Component {
       details = (
         <div>
           <Link to='/student/dashboard' className='btn btn-light'>
-            Back To Profiles
+            <i class='fas fa-arrow-left'></i> Back To Profiles
           </Link>
           <br></br>
           <br></br>
@@ -53,6 +54,7 @@ class CourseDetails extends Component {
               />
               <h1 className='large'>{this.state.currentTutor.name}</h1>
               <p>
+                <i class='fas fa-map-marker-alt'></i>
                 {this.state.currentTutor.city},{" "}
                 {this.state.currentTutor.country}
               </p>
@@ -98,6 +100,9 @@ class CourseDetails extends Component {
         </div>
       );
     }
+
+    if (this.props.loading || details == null) details = <Spinner />;
+
     return <div>{details}</div>;
   }
 }
@@ -110,6 +115,7 @@ const mapDispatchToProps = (dispatch) => {
 
 const mapStateToProps = (state) => ({
   tutors: state.tutors,
+  loading: state.auth.loading,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CourseDetails);

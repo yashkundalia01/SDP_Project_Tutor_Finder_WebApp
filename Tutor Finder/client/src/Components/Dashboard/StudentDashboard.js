@@ -17,7 +17,7 @@ class StudentDashboard extends Component {
     let profiles = null;
     if (this.state.tutors != null) {
       profiles = this.state.tutors.map((t) => {
-        return (
+        return t.availability_status == "NO" ? null : (
           <div key={t._id} className='profile bg-light'>
             <img
               height={"200px"}
@@ -27,15 +27,16 @@ class StudentDashboard extends Component {
               alt=''
             />
             <div>
-              <h2>{t.name}</h2>
+              <h2> {t.name}</h2>
               <p>
-                {t.city}, {t.country}
+                <i class='fas fa-map-marker-alt danger-text'></i> {t.city},{" "}
+                {t.country}
               </p>
               <Link
                 to={"/student/detail?id=" + t._id}
                 className='btn btn-primary'
               >
-                View Profile
+                <i class='fas fa-eye'></i> View Profile
               </Link>
               <br></br>
               <br></br>

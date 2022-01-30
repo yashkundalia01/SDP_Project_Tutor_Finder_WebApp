@@ -9,7 +9,9 @@ class Welcome extends Component {
         <section className='background'>
           <div className='dark-overlay'>
             <div className='background-inner'>
-              <h1 className='x-large'>Tutor Finder</h1>
+              <h1 className='x-large'>
+                <i class='fas fa-search'></i> Tutor Finder
+              </h1>
               <p className='lead'>Welcome to the Tutor Finder App.</p>
               <div>
                 <Link to='/student/welcome' className='btn btn-primary'>

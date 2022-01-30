@@ -11,13 +11,15 @@ class navigationItems extends Component {
       margin: "10px",
       display: "block",
       width: "100%",
+      color: "white",
     };
 
     const authLinks = (
       <ul className='NavigationItems'>
+        <NavigationItem link='/tutor/post'> Posts </NavigationItem>
         <NavigationItem link='/tutor/dashboard'> Dashboard </NavigationItem>
         <Link onClick={this.props.logout} to='/tutor/login' style={myStyle}>
-          Logout
+          Logout <i class='fas fa-sign-out-alt'></i>
         </Link>
       </ul>
     );

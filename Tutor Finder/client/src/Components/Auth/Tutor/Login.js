@@ -32,7 +32,9 @@ class TutorLogin extends Component {
     let login_form = (
       <div>
         <h1 className='large primary-text'>Sign In</h1>
-        <p className='lead'>Sign into Your Account</p>
+        <p className='lead'>
+          <i class='fas fa-user'></i> Sign into Your Account
+        </p>
         <form className='form' onSubmit={(e) => this.onSubmitHandler(e)}>
           <div className='form-group'>
             <input
