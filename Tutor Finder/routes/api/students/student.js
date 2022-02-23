@@ -157,4 +157,28 @@ router.delete("/post/:post_id", auth, async (req, res) => {
   res.send("DELETED Successfully");
 });
 
+// @route   POST api/students/exists
+// @desc    To see user is exists or not using email id
+// @access  Public
+
+router.post("/exists", async (req, res) => {
+  const { email } = req.body;
+
+  try {
+    // See if user exists
+    let student = await Student.findOne({ email });
+
+    if (student == null) {
+      return res.status(400).json({
+        errors: [{ msg: "Account doesn't exists for this email id." }],
+      });
+    } else {
+      res.send("User exists.");
+    }
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server error");
+  }
+});
+
 module.exports = router;

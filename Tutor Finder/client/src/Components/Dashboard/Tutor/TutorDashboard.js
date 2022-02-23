@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import * as action from "../../../Store/actions";
 import Moment from "react-moment";
 import axios from "axios";
+import { Rating } from "react-simple-star-rating";
 
 class TutorDashboard extends Component {
   state = {
@@ -12,6 +13,8 @@ class TutorDashboard extends Component {
     education: null,
     courses: null,
     availability_status: "",
+    rating: 0,
+    noOfRating: 0,
   };
 
   async deleteCourse(id) {
@@ -64,6 +67,8 @@ class TutorDashboard extends Component {
       experience: this.props.tutor.experience,
       education: this.props.tutor.education,
       courses: this.props.tutor.course,
+      rating: this.props.tutor.rating,
+      noOfRating: this.props.tutor.noOfRating,
       availability_status: this.props.tutor.availability_status,
     });
   }
@@ -204,6 +209,9 @@ class TutorDashboard extends Component {
           <Link to={"/tutor/add-course"} className='btn btn-primary'>
             <i class='fas fa-plus'></i> Add Course
           </Link>
+          <Link to={"/tutor/changepassword"} className='btn btn-primary'>
+            <i class='fas fa-pen'></i> Change Password
+          </Link>
         </div>
         <br></br>
         <br></br>
@@ -228,7 +236,19 @@ class TutorDashboard extends Component {
         </button>
         <br></br>
         <br></br>
-        <h2 className='my-2'>Courses</h2>
+        <div className='row m-1'>
+          <h2 className='my-2 col-md-8'>Courses</h2>
+          <h6 className='p-2 border border-4 rounded col-md-4'>
+            Overall rating: {this.state.rating + " "}{" "}
+            <Rating
+              allowHover
+              readonly
+              initialValue={this.state.rating}
+              size={25}
+            />
+            ({this.state.noOfRating}){" "}
+          </h6>
+        </div>
         <table className='table'>
           <thead>
             <tr>

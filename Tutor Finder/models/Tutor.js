@@ -34,6 +34,38 @@ const TutorSchema = new mongoose.Schema({
     type: String,
     default: "NO",
   },
+  rating: {
+    type: Number,
+  },
+  noOfRating: {
+    type: Number,
+  },
+  sum_rating: {
+    type: Number,
+  },
+  allRatings: [
+    {
+      name: {
+        type: String,
+        required: true,
+      },
+      email: {
+        type: String,
+        required: true,
+      },
+      feedback: {
+        type: String,
+      },
+      rating: {
+        type: Number,
+        required: true,
+      },
+      date: {
+        type: Date,
+        default: Date.now,
+      },
+    },
+  ],
   course: [
     {
       title: {

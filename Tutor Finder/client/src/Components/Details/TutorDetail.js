@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import * as action from "../../Store/actions";
 import Moment from "react-moment";
 import Spinner from "../UI/Spinner/Spinner";
@@ -20,6 +20,9 @@ class TutorDetail extends Component {
     this.setState({ ...this.state, currentTutor: this.state.tutors[index] });
   }
   render() {
+    if (!localStorage.token) {
+      return <Redirect to='/' />;
+    }
     let tutor = this.state.currentTutor;
     if (tutor != null) {
       tutor = (

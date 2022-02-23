@@ -62,4 +62,67 @@ router.post("/", async (req, res) => {
   }
 });
 
+/* @route   POST api/tutors/auth/changepassword
+ * @desc    Update user's password
+ * @access  Private
+ */
+router.post("/changepassword", auth, async (req, res) => {
+  const { oldPassword, newPassword } = req.body;
+  const userId = req.user.id;
+
+  try {
+    let user = await Student.findById(userId);
+
+    //Authenticating user
+    const isMatch = await bcrypt.compare(oldPassword, user.password);
+    if (!isMatch) {
+      return res.status(400).json({ errors: [{ msg: "Invalid Password!!!" }] });
+    }
+
+    // Encrypt password
+    const salt = await bcrypt.genSalt(10);
+    let hash_password = await bcrypt.hash(newPassword, salt);
+
+    //updating database
+    user = await Student.updateOne(
+      { email: user.email },
+      { password: hash_password }
+    );
+    res.send("Password Updated");
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send("Server error");
+  }
+});
+
+/* @route   POST /api/students/auth/setpassword
+ * @desc    Set user's new password
+ * @access  Private
+ */
+router.post("/setpassword", async (req, res) => {
+  const { email, password } = req.body;
+
+  try {
+    let user = await Student.findOne({ email });
+
+    if (!user) {
+      return res.status(400).json({ errors: [{ msg: "User not exists" }] });
+    }
+
+    // Encrypt password
+    const salt = await bcrypt.genSalt(10);
+    let hash_password = await bcrypt.hash(password, salt);
+
+    //updating database
+    user = await Student.updateOne(
+      { email: user.email },
+      { password: hash_password }
+    );
+    res.send("Password Updated");
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send("Server error");
+  }
+});
+
 module.exports = router;

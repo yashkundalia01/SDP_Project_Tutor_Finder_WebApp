@@ -362,7 +362,12 @@ class StudentProfile extends Component {
               required
             />
           </div>
-          <input type='submit' className='btn btn-primary' value='Update' />
+          <div className='dash-buttons'>
+            <input type='submit' className='btn btn-primary' value='Update' />
+            <Link to={"/student/changepassword"} className='btn btn-primary'>
+              <i class='fas fa-pen'></i> Change Password
+            </Link>
+          </div>
         </form>
       </div>
     );

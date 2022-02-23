@@ -12,12 +12,23 @@ import StudentProfile from "../Components/Profile/StudentProfile";
 import CourseDetails from "../Components/Details/CourseDetails";
 import post from "../Components/Post/AddPost";
 import StudentPosts from "../Components/Post/StudentPosts";
+import ChangePassword from "../Components/Auth/Student/ChangePassword";
+import SetPassword from "../Components/Auth/Student/SetPassword";
+import ForgetPassword from "../Components/Auth/Student/ForgetPassword";
 class Student extends Component {
   async componentDidMount() {
     await this.props.loadStudent();
   }
 
   render() {
+    if (!localStorage.token) {
+    } else {
+      if (localStorage.role == "tutor") {
+        return <Redirect to='/tutor/login' />;
+      } else {
+        localStorage.setItem("role", "student");
+      }
+    }
     return (
       <div>
         <Layout>
@@ -31,6 +42,17 @@ class Student extends Component {
             <Route exact path='/student/profile' component={StudentProfile} />
             <Route exact path='/student/addpost' component={post} />
             <Route exact path='/student/post' component={StudentPosts} />
+            <Route
+              exact
+              path='/student/changepassword'
+              component={ChangePassword}
+            />
+            <Route
+              exact
+              path='/student/forgetpassword'
+              component={ForgetPassword}
+            />
+            <Route path='/student/setpassword' component={SetPassword} />
           </Switch>
         </Layout>
       </div>
