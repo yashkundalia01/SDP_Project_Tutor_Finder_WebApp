@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Tutor = require("../../../models/Tutor");
+const Student = require("../../../models/Student");
 const bcrypt = require("bcryptjs");
 const config = require("config");
 const jwt = require("jsonwebtoken");
@@ -298,6 +299,84 @@ router.post("/availability_status", auth, async (req, res) => {
   // Save
   tutor.save();
   res.send("UPDATED Successfully");
+});
+
+// @route   POST api/tutors/rate
+// @desc    Add rating
+// @access  Private
+
+router.post("/rate", async (req, res) => {
+  const { email_id, name, rating, feedback, tid } = req.body;
+
+  try {
+    // See if user exists
+    let tutor = await Tutor.findById(tid);
+
+    if (tutor == null) {
+      return res.status(400).json({ errors: [{ msg: "Tutor not exists" }] });
+    }
+
+    let student = await Student.findOne({ email: email_id });
+
+    if (student == null) {
+      return res.status(400).json({
+        errors: [{ msg: "You don't have an account in tutor finder." }],
+      });
+    }
+
+    const newRating = {
+      name: name,
+      email: email_id,
+      feedback: feedback,
+      rating: rating,
+    };
+
+    let found = false;
+    tutor.allRatings.forEach((t) => {
+      if (t.email == email_id) {
+        found = true;
+      }
+    });
+    if (found == true) {
+      return res
+        .status(400)
+        .send({ errors: [{ msg: "Feedback already taken." }] });
+    } else {
+      tutor.sum_rating = tutor.sum_rating + rating;
+      tutor.noOfRating = tutor.noOfRating + 1;
+      tutor.rating = tutor.sum_rating / tutor.noOfRating;
+      tutor.allRatings.unshift(newRating);
+      tutor.save();
+      res.send("Feedback received.");
+    }
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server error");
+  }
+});
+
+// @route   POST api/tutors/exists
+// @desc    To see user is exists or not using email id
+// @access  Public
+
+router.post("/exists", async (req, res) => {
+  const { email } = req.body;
+
+  try {
+    // See if user exists
+    let tutor = await Tutor.findOne({ email });
+
+    if (tutor == null) {
+      return res.status(400).json({
+        errors: [{ msg: "You don't have an account in tutor finder." }],
+      });
+    } else {
+      res.send("User exists.");
+    }
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server error");
+  }
 });
 
 module.exports = router;

@@ -5,6 +5,7 @@
   --light-color: #f4f4f4;
   --danger-color: #dc3545;
   --success-color: #28a745;
+  --warning-color: #e9dd31;
 }
 
 * {
@@ -19,6 +20,10 @@ body {
   line-height: 1.6;
   background-color: #fff;
   color: #333;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  overflow-y: scroll;
 }
 
 a {
@@ -46,7 +51,7 @@ img {
 
 /* Text Styles*/
 .x-large {
-  font-size: 4rem;
+  font-size: 3rem;
   line-height: 1.2;
   font-weight: bold;
   margin-bottom: 1rem;
@@ -168,6 +173,11 @@ img {
 
 .bg-primary1 {
   background: var(--primary-color);
+  color: #fff;
+}
+
+.warning-btn {
+  background: var(--warning-color);
   color: #fff;
 }
 

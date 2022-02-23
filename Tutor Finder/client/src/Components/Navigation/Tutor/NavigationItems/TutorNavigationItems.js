@@ -16,6 +16,7 @@ class navigationItems extends Component {
 
     const authLinks = (
       <ul className='NavigationItems'>
+        <NavigationItem link='/tutor/feedbacks'> Feedbacks </NavigationItem>
         <NavigationItem link='/tutor/post'> Posts </NavigationItem>
         <NavigationItem link='/tutor/dashboard'> Dashboard </NavigationItem>
         <Link onClick={this.props.logout} to='/tutor/login' style={myStyle}>

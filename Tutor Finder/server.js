@@ -11,9 +11,7 @@ const PORT = process.env.PORT || 5000;
 app.use(express.json({ extended: false }));
 
 // Define Routes For Student
-// Register , Update Profile
 app.use("/api/students", require("./routes/api/students/student"));
-// Get Current User, Login
 app.use("/api/students/auth", require("./routes/api/students/auth"));
 
 // Define Routes For Tutor

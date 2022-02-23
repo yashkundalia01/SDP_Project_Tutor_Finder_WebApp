@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import * as action from "../../Store/actions";
 import Spinner from "../UI/Spinner/Spinner";
 
@@ -30,6 +30,10 @@ class CourseDetails extends Component {
     });
   }
   render() {
+    if (!localStorage.token) {
+      return <Redirect to='/' />;
+    }
+
     let details = this.state.currentCourse;
     if (details != null) {
       let text = details.demo_video_link;

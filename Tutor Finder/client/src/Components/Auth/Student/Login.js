@@ -54,11 +54,16 @@ class StudentLogin extends Component {
               minLength='6'
               required
             />
+            <p className='my-1'>
+              Forget password?{" "}
+              <Link to='/student/forgetpassword'>Click here.</Link>
+            </p>
           </div>
+
           <input type='submit' className='btn btn-primary' value='Login' />
         </form>
         <p className='my-1'>
-          Don't have an account? <Link to='/tutor/register'>Sign Up</Link>
+          Don't have an account? <Link to='/student/register'>Sign Up</Link>
         </p>
       </div>
     );

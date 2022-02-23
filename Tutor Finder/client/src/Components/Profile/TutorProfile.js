@@ -388,7 +388,13 @@ class TutorProfile extends Component {
             />
             <small className='form-text'>Upload your profile image</small>
             <br></br>
-            <img className='round-img' src={this.state.photo_url} alt='' />
+            <img
+              // height={"150px"}
+              // width={"150px"}
+              className='img-thumbnail w-25 h-25'
+              src={this.state.photo_url}
+              alt=''
+            />
           </div>
 
           <input type='submit' className='btn btn-primary' value='Update' />

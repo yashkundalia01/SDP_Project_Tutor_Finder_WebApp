@@ -54,6 +54,10 @@ class TutorLogin extends Component {
               minLength='6'
               required
             />
+            <p className='my-1'>
+              Forget password?{" "}
+              <Link to='/tutor/forgetpassword'>Click here.</Link>
+            </p>
           </div>
           <input type='submit' className='btn btn-primary' value='Login' />
         </form>

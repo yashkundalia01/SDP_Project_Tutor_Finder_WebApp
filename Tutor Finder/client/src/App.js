@@ -5,6 +5,7 @@ import Tutor from "./Container/Tutor";
 import StudentWelcome from "./Components/Welcome/Student/StudentWelcome";
 import TutorWelcome from "./Components/Welcome/Tutor/TutorWelcome";
 import Welcome from "./Components/Welcome/Welcome";
+import Rate from "./Components/Dashboard/Tutor/Rate";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Switch>
             <Route path='/student' component={Student} />
             <Route path='/tutor' component={Tutor} />
+            <Route path='/rate' component={Rate} />
           </Switch>
         </section>
       </div>
