@@ -36,12 +36,15 @@ const TutorSchema = new mongoose.Schema({
   },
   rating: {
     type: Number,
+    default: 0,
   },
   noOfRating: {
     type: Number,
+    default: 0,
   },
   sum_rating: {
     type: Number,
+    default: 0,
   },
   allRatings: [
     {
