@@ -44,15 +44,15 @@ class Welcome extends Component {
               </p>
               <div className='row m-4 p-3'>
                 {" "}
-                <div class='col-md-6'>
-                  <div class='card'>
+                <div className='col-md-6'>
+                  <div className='card'>
                     <div
-                      class='bg-image hover-overlay ripple'
+                      className='bg-image hover-overlay ripple'
                       data-mdb-ripple-color='light'
                     ></div>
-                    <div class='card-body'>
-                      <h5 class='card-title'>Student</h5>
-                      <p class='card-text'>
+                    <div className='card-body'>
+                      <h5 className='card-title'>Student</h5>
+                      <p className='card-text'>
                         Student can find their desired tutor.And Get tutor's
                         contact information. And student can also make a post
                         for new subjects.
@@ -63,15 +63,15 @@ class Welcome extends Component {
                     </div>
                   </div>
                 </div>
-                <div class='col-md-6'>
-                  <div class='card'>
+                <div className='col-md-6'>
+                  <div className='card'>
                     <div
-                      class='bg-image hover-overlay ripple'
+                      className='bg-image hover-overlay ripple'
                       data-mdb-ripple-color='light'
                     ></div>
-                    <div class='card-body'>
-                      <h5 class='card-title'>Tutor</h5>
-                      <p class='card-text'>
+                    <div className='card-body'>
+                      <h5 className='card-title'>Tutor</h5>
+                      <p className='card-text'>
                         Tutor can create full profile page. Tutor can add new
                         course information. Tutor provide their contact
                         information.
@@ -85,7 +85,7 @@ class Welcome extends Component {
               </div>
             </div>
             <div className='col-md-4'>
-              <video height={"400px"} autoplay={true} loop muted autoPlay>
+              <video height={"400px"} loop muted autoPlay>
                 <source src='assets/images/learn.mp4' type='video/mp4' />
                 Your browser does not support the video tag.
               </video>

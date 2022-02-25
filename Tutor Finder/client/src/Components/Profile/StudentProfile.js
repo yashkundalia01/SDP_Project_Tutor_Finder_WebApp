@@ -3,6 +3,7 @@ import { Link, Redirect } from "react-router-dom";
 import * as actions from "../../Store/actions";
 import { connect } from "react-redux";
 import Spinner from "../UI/Spinner/Spinner";
+import axios from "axios";
 
 class StudentProfile extends Component {
   state = {
@@ -44,6 +45,24 @@ class StudentProfile extends Component {
       country,
       phone_no,
     });
+  };
+
+  deleteProfile = async (e) => {
+    e.preventDefault();
+    const config = {
+      headers: {
+        "x-auth-token": localStorage.token,
+      },
+    };
+    try {
+      const res = await axios.delete("/api/students", config);
+      this.props.setAlert("Account Deleted.", "danger");
+      await this.props.logout();
+      this.props.history.replace("/student/register");
+    } catch (error) {
+      console.log("error:");
+      console.log(error);
+    }
   };
 
   render() {
@@ -367,6 +386,12 @@ class StudentProfile extends Component {
             <Link to={"/student/changepassword"} className='btn btn-primary'>
               <i class='fas fa-pen'></i> Change Password
             </Link>
+            <button
+              className='btn btn-danger'
+              onClick={(e) => this.deleteProfile(e)}
+            >
+              <i class='fas fa-trash-alt'></i> Delete Account
+            </button>
           </div>
         </form>
       </div>
@@ -387,7 +412,8 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => {
   return {
     loadStudent: () => dispatch(actions.loadStudent()),
-
+    logout: () => dispatch(actions.logout()),
+    setAlert: (msg, alertType) => dispatch(actions.setAlert(msg, alertType)),
     update: ({ name, email, education_info, city, country, phone_no }) =>
       dispatch(
         actions.updateStudent({

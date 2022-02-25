@@ -134,7 +134,7 @@ class StudentDashboard extends Component {
     const newResult = this.state.searchResult.filter((t) => {
       return t.rating >= 3;
     });
-    this.filterRating4();
+    this.setState({ ...this.state, searchResult: newResult });
   };
 
   filterRating4 = () => {

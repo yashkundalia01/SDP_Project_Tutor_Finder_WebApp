@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import Spinner from "../UI/Spinner/Spinner";
 import storage from "../../firebase";
 import { AUTH_START_LOADING } from "../../Store/actions/actionTypes";
+import axios from "axios";
 
 class TutorProfile extends Component {
   state = {
@@ -73,6 +74,24 @@ class TutorProfile extends Component {
     );
   };
 
+  deleteProfile = async (e) => {
+    e.preventDefault();
+    console.log("Delete account");
+    const config = {
+      headers: {
+        "x-auth-token": localStorage.token,
+      },
+    };
+    try {
+      const res = await axios.delete("/api/tutors", config);
+      const data = await this.props.logout();
+      this.props.setAlert("Account Deleted.", "danger");
+      this.props.history.replace("/tutor/register");
+    } catch (error) {
+      console.log("error:");
+      console.log(error);
+    }
+  };
   render() {
     if (!localStorage.token) {
       return <Redirect to='/' />;
@@ -396,8 +415,15 @@ class TutorProfile extends Component {
               alt=''
             />
           </div>
-
-          <input type='submit' className='btn btn-primary' value='Update' />
+          <div className='dash-buttons'>
+            <input type='submit' className='btn btn-primary' value='Update' />
+            <button
+              className='btn btn-danger'
+              onClick={(e) => this.deleteProfile(e)}
+            >
+              <i class='fas fa-trash-alt'></i> Delete Account
+            </button>
+          </div>
         </form>
       </div>
     );
@@ -417,6 +443,8 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => {
   return {
     loadTutor: () => dispatch(actions.loadTutor()),
+    logout: () => dispatch(actions.logout()),
+    setAlert: (msg, alertType) => dispatch(actions.setAlert(msg, alertType)),
     startLoading: () => dispatch({ type: AUTH_START_LOADING }),
     update: ({ name, email, city, country, phone_no, photo_url }) =>
       dispatch(

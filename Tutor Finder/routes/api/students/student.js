@@ -181,4 +181,19 @@ router.post("/exists", async (req, res) => {
   }
 });
 
+// @route DELETE api/students
+// @desc Delete user
+// @access private
+
+router.delete("/", auth, async (req, res) => {
+  try {
+    //Remove user
+    await Student.findOneAndRemove({ user: req.user.id });
+
+    res.json({ msg: "Account deleted" });
+  } catch (error) {
+    res.status(500).send("Server Error");
+  }
+});
+
 module.exports = router;
