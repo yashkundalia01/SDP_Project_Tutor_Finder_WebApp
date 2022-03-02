@@ -18,6 +18,7 @@ import ReactEncrypt from "react-encrypt";
 import ChangePassword from "../Components/Auth/Tutor/ChangePassword";
 import ForgetPassword from "../Components/Auth/Tutor/ForgetPassword";
 import SetPassword from "../Components/Auth/Tutor/SetPassword";
+import CourseDetails from "../Components/Details/CourseDetails";
 
 class Tutor extends Component {
   async componentDidMount() {
@@ -54,6 +55,7 @@ class Tutor extends Component {
                 component={AddEducation}
               />
               <Route exact path='/tutor/add-course' component={AddCourse} />
+              <Route path='/tutor/course-details' component={CourseDetails} />
               <Route exact path='/tutor/profile' component={TutorProfile} />
               <Route exact path='/tutor/post' component={PostList} />
               <Route

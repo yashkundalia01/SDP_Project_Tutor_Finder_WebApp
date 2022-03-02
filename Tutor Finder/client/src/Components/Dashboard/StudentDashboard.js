@@ -10,6 +10,8 @@ class StudentDashboard extends Component {
     searchResult: null,
     search: "",
     course: "Select",
+    sort: null,
+    star: null,
   };
 
   async componentDidMount() {
@@ -70,7 +72,7 @@ class StudentDashboard extends Component {
         a.rating > b.rating ? 1 : b.rating > a.rating ? -1 : 0
       );
       console.log(this.state.tutors);
-      this.setState({ ...this.state, searchResult: objs });
+      this.setState({ ...this.state, searchResult: objs, sort: "ltoh" });
     }
   };
   sortRatingD = () => {
@@ -81,7 +83,7 @@ class StudentDashboard extends Component {
       objs.sort((a, b) =>
         a.rating < b.rating ? 1 : b.rating < a.rating ? -1 : 0
       );
-      this.setState({ ...this.state, searchResult: objs });
+      this.setState({ ...this.state, searchResult: objs, sort: "htol" });
     }
   };
 
@@ -91,7 +93,7 @@ class StudentDashboard extends Component {
     });
     if (objs != null && objs != undefined) {
       objs.sort((a, b) => (a.name > b.name ? 1 : b.name > a.name ? -1 : 0));
-      this.setState({ ...this.state, searchResult: objs });
+      this.setState({ ...this.state, searchResult: objs, sort: "atoz" });
     }
   };
   sortNameD = () => {
@@ -101,7 +103,7 @@ class StudentDashboard extends Component {
     console.log(objs);
     if (objs != null && objs != undefined) {
       objs.sort((a, b) => (a.name < b.name ? 1 : b.name < a.name ? -1 : 0));
-      this.setState({ ...this.state, searchResult: objs });
+      this.setState({ ...this.state, searchResult: objs, sort: "ztoa" });
     }
   };
 
@@ -111,34 +113,73 @@ class StudentDashboard extends Component {
       search: "",
       searchResult: this.props.tutors,
       tutors: this.props.tutors,
-      course: "",
+      course: "Select",
+      sort: null,
+      star: null,
     });
     console.log(this.props.tutors);
   };
 
-  filterRating1 = () => {
-    const newResult = this.state.searchResult.filter((t) => {
+  sorting = () => {
+    const s = this.state.sort;
+    if (s == "atoz") this.sortNameA();
+    else if (s == "ztoa") this.sortNameD();
+    else if (s == "ltoh") this.sortRatingA();
+    else if (s == "htol") this.sortRatingD();
+  };
+
+  filterRating1 = async () => {
+    const newResult = this.state.tutors.filter((t) => {
       return t.rating >= 4.5;
     });
-    this.setState({ ...this.state, searchResult: newResult });
+    await this.setState({ ...this.state, searchResult: newResult, star: 4.5 });
+    await this.filterRating4clone();
   };
 
-  filterRating2 = () => {
-    const newResult = this.state.searchResult.filter((t) => {
+  filterRating2 = async () => {
+    const newResult = this.state.tutors.filter((t) => {
       return t.rating >= 4;
     });
-    this.setState({ ...this.state, searchResult: newResult });
+    await this.setState({ ...this.state, searchResult: newResult, star: 4 });
+    await this.filterRating4clone();
   };
 
-  filterRating3 = () => {
-    const newResult = this.state.searchResult.filter((t) => {
+  filterRating3 = async () => {
+    const newResult = this.state.tutors.filter((t) => {
       return t.rating >= 3;
     });
-    this.setState({ ...this.state, searchResult: newResult });
+    await this.setState({ ...this.state, searchResult: newResult, star: 3 });
+    await this.filterRating4clone();
   };
 
-  filterRating4 = () => {
+  filterRating4 = async (e) => {
+    if (e.target.value == "Select") {
+      const newResult = this.state.tutors;
+      await this.setState({ ...this.state, searchResult: newResult });
+      await this.sorting();
+    } else {
+      const newResult = this.state.tutors.filter((t) => {
+        const course = t.course.filter((c) => {
+          return c.title.toUpperCase().includes(e.target.value.toUpperCase());
+        });
+        return course != null && course != undefined && course.length != 0;
+      });
+      await this.setState({
+        ...this.state,
+        searchResult: newResult,
+        star: null,
+        course: e.target.value,
+      });
+      await this.sorting();
+    }
+  };
+
+  filterRating4clone = async () => {
     if (this.state.course == "Select") {
+      const newResult = this.state.searchResult;
+      await this.setState({ ...this.state, searchResult: newResult });
+      await this.sorting();
+    } else {
       const newResult = this.state.searchResult.filter((t) => {
         const course = t.course.filter((c) => {
           return c.title
@@ -147,27 +188,16 @@ class StudentDashboard extends Component {
         });
         return course != null && course != undefined && course.length != 0;
       });
-      this.setState({ ...this.state, searchResult: newResult });
+      await this.setState({
+        ...this.state,
+        searchResult: newResult,
+      });
+      await this.sorting();
     }
   };
 
   onCourseChangeHandler = (e) => {
-    if (e.target.value != "" && e.target.value != null) {
-      const newResult = this.state.searchResult.filter((t) => {
-        const course = t.course.filter((c) => {
-          return c.title.toUpperCase().includes(e.target.value.toUpperCase());
-        });
-        return course != null && course != undefined && course.length != 0;
-      });
-      this.setState({
-        ...this.state,
-        searchResult: newResult,
-        course: e.target.value,
-      });
-    } else {
-      this.setState({ ...this.state, course: "" });
-      console.log("456");
-    }
+    this.filterRating4(e);
   };
 
   render() {
@@ -282,16 +312,36 @@ class StudentDashboard extends Component {
             <h3>
               <b>Sort By:</b>
             </h3>
-            <button className='btn warning-btn' onClick={this.sortRatingA}>
+            <button
+              className={
+                this.state.sort == "ltoh" ? "btn btn-primary" : "btn btn-light"
+              }
+              onClick={this.sortRatingA}
+            >
               Rating: Low to High
             </button>
-            <button className='btn warning-btn' onClick={this.sortRatingD}>
+            <button
+              className={
+                this.state.sort == "htol" ? "btn btn-primary" : "btn btn-light"
+              }
+              onClick={this.sortRatingD}
+            >
               Rating: High to Low
             </button>
-            <button className='btn warning-btn' onClick={this.sortNameA}>
+            <button
+              className={
+                this.state.sort == "atoz" ? "btn btn-primary" : "btn btn-light"
+              }
+              onClick={this.sortNameA}
+            >
               Name: A to Z
             </button>
-            <button className='btn warning-btn' onClick={this.sortNameD}>
+            <button
+              className={
+                this.state.sort == "ztoa" ? "btn btn-primary" : "btn btn-light"
+              }
+              onClick={this.sortNameD}
+            >
               Name: Z to A
             </button>
           </div>
@@ -299,21 +349,6 @@ class StudentDashboard extends Component {
         <div className='collapse' id='collapseExample2'>
           <br></br>
           <div className='rounded border border-3 p-3'>
-            <p>
-              <h3>
-                <b>Rating</b>
-              </h3>
-              <button className='btn warning-btn' onClick={this.filterRating1}>
-                4.5 + <i className='fas fa-star'></i>
-              </button>
-              <button className='btn warning-btn' onClick={this.filterRating2}>
-                4 + <i className='fas fa-star'></i>
-              </button>
-              <button className='btn warning-btn' onClick={this.filterRating3}>
-                3 + <i className='fas fa-star'></i>
-              </button>
-            </p>
-            <hr></hr>
             <h3>
               <b>Course</b>
               <div className='form'>
@@ -323,7 +358,9 @@ class StudentDashboard extends Component {
                     required
                     value={this.state.course}
                   >
-                    <option value='Select'>Select Course</option>
+                    <option disabled selected hidden value='Select'>
+                      Select Course
+                    </option>
                     <option value='C++'>C++</option>
                     <option value='C#'>C#</option>
                     <option value='Machine Learning'>Machine Lerning</option>
@@ -332,6 +369,36 @@ class StudentDashboard extends Component {
                 </div>
               </div>
             </h3>
+            <hr></hr>
+            <p>
+              <h3>
+                <b>Rating</b>
+              </h3>
+              <button
+                className={
+                  this.state.star == 4.5 ? "btn btn-primary" : "btn btn-light"
+                }
+                onClick={this.filterRating1}
+              >
+                4.5 + <i className='fas fa-star'></i>
+              </button>
+              <button
+                className={
+                  this.state.star == 4 ? "btn btn-primary" : "btn btn-light"
+                }
+                onClick={this.filterRating2}
+              >
+                4 + <i className='fas fa-star'></i>
+              </button>
+              <button
+                className={
+                  this.state.star == 3 ? "btn btn-primary" : "btn btn-light"
+                }
+                onClick={this.filterRating3}
+              >
+                3 + <i className='fas fa-star'></i>
+              </button>
+            </p>
           </div>
         </div>
         <br></br>
