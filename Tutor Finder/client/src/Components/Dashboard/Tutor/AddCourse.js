@@ -71,6 +71,34 @@ class AddCourse extends Component {
               <option value='C#'>C#</option>
               <option value='Machine Learning'>Machine Lerning</option>
               <option value='Java'>Java</option>
+              <option value='Kotlin'>Kotlin</option>
+              <option value='Python'>Python</option>
+              <option value='Javascript'>Javascript</option>
+              <option value='PHP'>PHP</option>
+              <option value='Django framework'>Django framework</option>
+              <option value='ReactJS'>ReactJS</option>
+              <option value='AngularJS'>AngularJS</option>
+              <option value='MERN stack'>MERN stack</option>
+              <option value='MEAN stack'>MEAN stack</option>
+              <option value='Data science'>Data science</option>
+              <option value='Blockchain'>Blockchain</option>
+              <option value='Deep Learning'>Deep Learning</option>
+              <option value='AI'>AI</option>
+              <option value='Flutter'>Flutter</option>
+              <option value='Android Development(Java)'>
+                Android Development(Java)
+              </option>
+              <option value='IOS app Development'>Java</option>
+              <option value='Swift'>Swift</option>
+              <option value='Big Data'>Big Data</option>
+              <option value='DSA'>DSA</option>
+              <option value='Flask'>Flask</option>
+              <option value='Tensorflow'>Tensorflow</option>
+              <option value='IOT'>IOT</option>
+              <option value='Asp.net Web framework'>
+                ASP.net Web framework
+              </option>
+              <option value='Asp.net core'>Asp.net core</option>
             </select>
           </div>
           <div className='form-group'>

@@ -115,10 +115,20 @@ class TutorDashboard extends Component {
             <td>{item.title}</td>
             <td className='hide-sm'>{item.fee}</td>
             <td className='hide-sm'>{item.language}</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+            <td>
+              <Link
+                className='btn btn-dark'
+                to={
+                  "/tutor/course-details?tid=" +
+                  this.props.tutor._id +
+                  "&cid=" +
+                  item._id
+                }
+              >
+                {" "}
+                <i class='fas fa-eye'></i> See Detalis
+              </Link>
+            </td>
             <td>
               <button
                 className='btn btn-primary'

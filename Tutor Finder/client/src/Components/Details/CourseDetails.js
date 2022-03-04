@@ -35,6 +35,17 @@ class CourseDetails extends Component {
     }
 
     let details = this.state.currentCourse;
+    let links =
+      localStorage.role == "student" ? (
+        <Link to='/student/dashboard' className='btn btn-light'>
+          <i class='fas fa-arrow-left'></i> Back To Profiles
+        </Link>
+      ) : (
+        <Link to='/tutor/dashboard' className='btn btn-light'>
+          <i class='fas fa-arrow-left'></i> Back To Dashboard
+        </Link>
+      );
+
     if (details != null) {
       let text = details.demo_video_link;
       let result = text.indexOf("watch");
@@ -42,9 +53,7 @@ class CourseDetails extends Component {
         "https://www.youtube.com/embed/" + text.substring(result);
       details = (
         <div>
-          <Link to='/student/dashboard' className='btn btn-light'>
-            <i class='fas fa-arrow-left'></i> Back To Profiles
-          </Link>
+          {links}
           <br></br>
           <br></br>
           <div className='profile-grid my-1'>
